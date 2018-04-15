@@ -15,11 +15,20 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  gift_id                :integer
+#  fortune_id             :integer
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
+#  index_users_on_fortune_id            (fortune_id)
+#  index_users_on_gift_id               (gift_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (fortune_id => fortunes.id)
+#  fk_rails_...  (gift_id => gifts.id)
 #
 
 class User < ApplicationRecord
@@ -29,4 +38,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :team
+  has_many :gifts
+  has_many :fortunes
 end
