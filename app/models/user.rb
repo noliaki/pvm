@@ -17,6 +17,12 @@
 #  updated_at             :datetime         not null
 #  gift_id                :integer
 #  fortune_id             :integer
+#  name                   :string(255)
+#  thumbnail_file_name    :string(255)
+#  thumbnail_content_type :string(255)
+#  thumbnail_file_size    :integer
+#  thumbnail_updated_at   :datetime
+#  team_id                :integer
 #
 # Indexes
 #
@@ -24,11 +30,13 @@
 #  index_users_on_fortune_id            (fortune_id)
 #  index_users_on_gift_id               (gift_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_team_id               (team_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (fortune_id => fortunes.id)
 #  fk_rails_...  (gift_id => gifts.id)
+#  fk_rails_...  (team_id => teams.id)
 #
 
 class User < ApplicationRecord
@@ -38,6 +46,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :team
+
   has_many :gifts
   has_many :fortunes
+
+  # paperclip
+  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
+
 end

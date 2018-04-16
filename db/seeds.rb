@@ -6,8 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.new(
-  email: 'hoge@example.com',
-  password: 'fugahoge'
+team = Team.create(
+  name: 'hoge_team'
 )
-user.save!
+
+10.times do |i|
+  user = User.new(
+    email: "hoge_#{i}@example.com",
+    password: 'fugahoge'
+  )
+  user.team = team
+  user.save!
+end

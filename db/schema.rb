@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180415151226) do
+ActiveRecord::Schema.define(version: 20180416092941) do
 
   create_table "fortunes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20180415151226) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "thumbnail_file_name"
+    t.string "thumbnail_content_type"
+    t.integer "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -47,14 +53,23 @@ ActiveRecord::Schema.define(version: 20180415151226) do
     t.datetime "updated_at", null: false
     t.bigint "gift_id"
     t.bigint "fortune_id"
+    t.string "name"
+    t.string "thumbnail_file_name"
+    t.string "thumbnail_content_type"
+    t.integer "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+    t.bigint "team_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fortune_id"], name: "index_users_on_fortune_id"
     t.index ["gift_id"], name: "index_users_on_gift_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["team_id"], name: "index_users_on_team_id"
   end
 
   add_foreign_key "fortunes", "users"
   add_foreign_key "gifts", "users"
+  add_foreign_key "teams", "users"
   add_foreign_key "users", "fortunes"
   add_foreign_key "users", "gifts"
+  add_foreign_key "users", "teams"
 end
