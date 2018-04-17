@@ -190,5 +190,42 @@ a:active {
 img {
   max-width: 100%;
   vertical-align: bottom;
-  z-index: 1;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.g-footer {
+  margin-top: 50px;
+  text-align: center;
+}
+.g-header {
+  border-bottom: 1px solid #cdd7d6;
+}
+.g-header-container {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+.g-header-logo {
+  flex-basis: 60px;
+}
+.g-header-logo__anchor > img {
+  vertical-align: middle;
+}
+.g-header-user-info {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.g-header-user-info__point {
+  color: #f87060;
+  font-weight: bold;
+}
+.g-header-user-info__thumb {
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 10px;
 }

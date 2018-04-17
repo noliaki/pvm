@@ -1,12 +1,31 @@
 doctype html
-html
+html(lang="ja")
   head
-    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta charset='utf-8'
+    meta http-equiv='X-UA-Compatible' content='IE=edge'
+    meta name='viewport' content='width=device-width initial-scale=1, shrink-to-fit=no'
+    meta name='description' content='DESCRIPTION'
+    meta name='format-detection' content='telephone=no,address=no,email=no'
+
+
     title Source
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    p.notice= notice
-    p.alert= alert
-    = yield
+    header.g-header
+      .container.g-header-container
+        .g-header-logo
+          = link_to image_tag('logo.svg'), '/', class: 'g-header-logo__anchor'
+        .g-header-user-info
+          .g-header-user-info__point
+            = current_user.fortunes.length
+          .g-header-user-info__thumb
+            = link_to image_tag(current_user.thumbnail.url(:thumb)), edit_user_registration_path
+    main.main-content
+      p.notice= notice
+      p.alert= alert
+      = yield
+
+    footer.g-footer
+      small= "copyright @#{Time.current.year}"

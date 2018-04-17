@@ -2,7 +2,7 @@
   "name": "source",
   "private": true,
   "scripts": {
-    "dev": "",
+    "dev": "npm run stylus:dev",
     "stylus": "stylus --use autoprefixer-stylus --with \"{ browsers: [] }\" ./front-end/stylus/application.styl --out ./app/assets/stylesheets/application.css",
     "stylus:dev": "stylus --use autoprefixer-stylus --with \"{ browsers: [] }\" ./front-end/stylus/application.styl --out ./app/assets/stylesheets/application.css --watch ./front-end/stylus/application.styl"
   },
