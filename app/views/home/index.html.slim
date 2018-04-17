@@ -1,7 +1,8 @@
-h1 Home#index
-p Find me in app/views/home/index.html.erb
-.hoge= current_user.email
-.hoge= current_user.name
-.hoge= current_user.thumbnail.url(:thumbnail)
-= link_to 'hoge', edit_user_registration_path
-img src="#{current_user.thumbnail.url(:thumb)}" alt=""/
+
+
+- if current_user.fortunes.empty?
+  | 何もないよ
+- else
+  ul
+    - current_user.fortunes.each do |fortune|
+      li

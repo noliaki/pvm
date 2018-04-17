@@ -18,10 +18,11 @@ html(lang="ja")
         .g-header-logo
           = link_to image_tag('logo.svg'), '/', class: 'g-header-logo__anchor'
         .g-header-user-info
-          .g-header-user-info__point
-            = current_user.fortunes.length
-          .g-header-user-info__thumb
-            = link_to image_tag(current_user.thumbnail.url(:thumb)), edit_user_registration_path
+          - if user_signed_in?
+            .g-header-user-info__point
+              = current_user.fortunes.length
+            .g-header-user-info__thumb
+              = link_to image_tag(current_user.thumbnail.url(:thumb)), edit_user_registration_path
     main.main-content
       p.notice= notice
       p.alert= alert
