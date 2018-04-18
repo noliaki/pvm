@@ -17,4 +17,5 @@ team = Team.create(
   )
   user.team = team
   user.save!
+  user.gifts.create
 end

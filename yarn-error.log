@@ -1,14 +1,14 @@
 Arguments: 
-  /Users/01028649/.nodebrew/node/v8.11.1/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js stylus:dev
+  /Users/noliaki/.nodebrew/node/v8.10.0/bin/node /usr/local/Cellar/yarn/1.5.1_1/libexec/bin/yarn.js dev
 
 PATH: 
-  /Users/01028649/.rbenv/shims:/Users/01028649/.nodebrew/current/bin:/Users/01028649/.rbenv/shims:/Users/01028649/.nodebrew/current/bin:`yarn:global:bin`:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:`yarn:global:bin`
+  /Users/noliaki/.rbenv/shims:/Users/noliaki/.nodebrew/current/bin:/Users/noliaki/.rbenv/shims:/Users/noliaki/.nodebrew/current/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 Yarn version: 
   1.5.1
 
 Node version: 
-  8.11.1
+  8.10.0
 
 Platform: 
   darwin x64
@@ -18,9 +18,9 @@ npm manifest:
     "name": "source",
     "private": true,
     "scripts": {
-      "dev": "",
+      "dev": "npm run stylus:dev",
       "stylus": "stylus --use autoprefixer-stylus --with \"{ browsers: [] }\" ./front-end/stylus/application.styl --out ./app/assets/stylesheets/application.css",
-      "stylus:dev": "stylus --use autoprefixer-stylus --with \"{ browsers: [] }\" ./front-end/stylus/application.styl --out ./app/assets/stylesheets/application.css --watch ./front-end/stylus/style.styl"
+      "stylus:dev": "stylus --use autoprefixer-stylus --with \"{ browsers: [] }\" ./front-end/stylus/application.styl --out ./app/assets/stylesheets/application.css --watch ./front-end/stylus/application.styl"
     },
     "dependencies": {
       "autoprefixer-stylus": "^0.14.0",
@@ -308,8 +308,8 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c stylus --use autoprefixer-stylus --with "{ browsers: [] }" ./front-end/stylus/application.styl --out ./app/assets/stylesheets/application.css --watch ./front-end/stylus/style.styl
-  Directory: /Users/01028649/private/private-virtual-money/source
+  Arguments: -c npm run stylus:dev
+  Directory: /Users/noliaki/works/pvm/source
   Output:
   
       at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1_1/libexec/lib/cli.js:186:110)
