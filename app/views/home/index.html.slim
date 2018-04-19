@@ -1,3 +1,9 @@
+- if flash[:alert]
+  = flash[:alert]
+
+
+= current_user.gifts.size
+
 = form_for(@fortune, url: fortune_index_path) do |f|
   = f.select :user_id, @users.map {|user| [user.name || user.email, user.id]}, {prompt: "選択してください"}
   = f.text_area :message
@@ -6,5 +12,8 @@
   | 何もないよ
 - else
   ul
-    - current_user.fortunes.each do |fortune|
+    - @has_fortunes.each do |fortune|
       li
+        = fortune.user.email
+        br/
+        = fortune.message

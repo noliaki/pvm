@@ -17,5 +17,7 @@ team = Team.create(
   )
   user.team = team
   user.save!
-  user.gifts.create
+  3.times do
+    user.gifts.create
+  end
 end

@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418121328) do
+ActiveRecord::Schema.define(version: 20180420125110) do
 
   create_table "fortunes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "message"
+    t.bigint "from_user_id"
+    t.index ["from_user_id"], name: "index_fortunes_on_from_user_id"
     t.index ["user_id"], name: "index_fortunes_on_user_id"
   end
 
@@ -68,6 +70,7 @@ ActiveRecord::Schema.define(version: 20180418121328) do
   end
 
   add_foreign_key "fortunes", "users"
+  add_foreign_key "fortunes", "users", column: "from_user_id"
   add_foreign_key "gifts", "users"
   add_foreign_key "teams", "users"
   add_foreign_key "users", "fortunes"

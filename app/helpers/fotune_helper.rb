@@ -1,0 +1,2 @@
+module FotuneHelper
+end
