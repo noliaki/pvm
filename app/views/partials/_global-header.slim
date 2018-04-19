@@ -4,8 +4,10 @@ header.g-header
       = link_to image_tag('logo.svg'), '/', class: 'g-header-logo__anchor'
     - if user_signed_in?
       .g-header-user-info
+        .g-header-user-info__email
+          = current_user.email
         .g-header-user-info__point
-          = current_user.fortunes.length
+          = current_user.fortunes.count
         .g-header-user-info__thumb
           = link_to image_tag(current_user.thumbnail.url(:thumb)), edit_user_registration_path
         .g-header-user-info__logout

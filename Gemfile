@@ -37,6 +37,7 @@ gem 'devise', '~> 4.4'
 gem 'slim-rails', '~> 3.1.3'
 gem 'cancancan', '~> 2.0'
 gem 'paperclip', "~> 6.0.0"
+gem "paranoia", "~> 2.2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

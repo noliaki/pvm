@@ -12,11 +12,14 @@ class FortuneController < ApplicationController
         alert: '送りたい人が存在しないようです。'
       } if to_user.nil?
 
-    current_user.gifts.first.destroy
     to_user.fortunes.create(
       from_user: current_user,
       message: fortune_params[:message]
-    )
+    ) if current_user.gifts.first.destroy
+
+    redirect_to home_index_path, flash: {
+      notice: "#{to_user.name || to_user.email}に感謝を送れました"
+    }
   end
 
   private

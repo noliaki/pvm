@@ -1,11 +1,13 @@
 - if flash[:alert]
   = flash[:alert]
+- if flash[:notice]
+  = flash[:notice]
 
 
-= current_user.gifts.size
+= current_user.gifts.count
 
 = form_for(@fortune, url: fortune_index_path) do |f|
-  = f.select :user_id, @users.map {|user| [user.name || user.email, user.id]}, {prompt: "選択してください"}
+  = select_tag 'to_user_id', options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください"}
   = f.text_area :message
   = f.submit
 - if current_user.fortunes.empty?
@@ -14,6 +16,8 @@
   ul
     - @has_fortunes.each do |fortune|
       li
-        = fortune.user.email
+        = image_tag(fortune.from_user.thumbnail.url(:thumb))
+        = fortune.created_at.strftime("%Y年%m月%d日 %H:%M:%S")
+        = fortune.from_user.email
         br/
         = fortune.message
