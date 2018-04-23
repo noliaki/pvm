@@ -5,7 +5,9 @@ class FortuneController < ApplicationController
         alert: '送れる感謝はないです。'
       } if current_user.gifts.empty?
 
-    to_user = User.find_by(id: params[:fortune][:user_id])
+    to_user = User.find_by(id: params[:to_user_id])
+
+    binding.pry
 
     return redirect_to home_index_path,
       flash: {
