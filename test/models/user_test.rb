@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :bigint(8)        not null, primary key
 #  email                  :string(255)      default(""), not null
 #  encrypted_password     :string(255)      default(""), not null
 #  reset_password_token   :string(255)
@@ -15,14 +15,16 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  gift_id                :integer
-#  fortune_id             :integer
+#  gift_id                :bigint(8)
+#  fortune_id             :bigint(8)
 #  name                   :string(255)
 #  thumbnail_file_name    :string(255)
 #  thumbnail_content_type :string(255)
 #  thumbnail_file_size    :integer
 #  thumbnail_updated_at   :datetime
-#  team_id                :integer
+#  team_id                :bigint(8)
+#  gifts_count            :integer          default(0)
+#  fortunes_count         :integer          default(0)
 #
 # Indexes
 #

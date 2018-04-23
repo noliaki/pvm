@@ -2,10 +2,10 @@
 #
 # Table name: gifts
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :integer
+#  user_id    :bigint(8)
 #  deleted_at :datetime
 #
 # Indexes
@@ -21,5 +21,5 @@
 class Gift < ApplicationRecord
   acts_as_paranoid
 
-  belongs_to :user
+  belongs_to :user, counter_cache: true
 end

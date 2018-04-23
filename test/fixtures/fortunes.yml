@@ -2,12 +2,12 @@
 #
 # Table name: fortunes
 #
-#  id           :integer          not null, primary key
+#  id           :bigint(8)        not null, primary key
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  message      :string(255)
-#  from_user_id :integer
-#  user_id      :integer
+#  from_user_id :bigint(8)
+#  user_id      :bigint(8)
 #
 # Indexes
 #

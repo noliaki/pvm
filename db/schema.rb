@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421150202) do
+ActiveRecord::Schema.define(version: 20180423122435) do
 
   create_table "fortunes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 20180421150202) do
     t.integer "thumbnail_file_size"
     t.datetime "thumbnail_updated_at"
     t.bigint "team_id"
+    t.integer "gifts_count", default: 0
+    t.integer "fortunes_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fortune_id"], name: "index_users_on_fortune_id"
     t.index ["gift_id"], name: "index_users_on_gift_id"

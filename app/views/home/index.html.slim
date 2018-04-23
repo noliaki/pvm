@@ -4,7 +4,7 @@
   = flash[:notice]
 
 
-= current_user.gifts.count
+= current_user.gifts.size
 
 = form_for(@fortune, url: fortune_index_path) do |f|
   = select_tag 'to_user_id', options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください"}
