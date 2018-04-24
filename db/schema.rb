@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423122435) do
+ActiveRecord::Schema.define(version: 20180424111133) do
 
   create_table "fortunes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 20180423122435) do
     t.string "message"
     t.bigint "from_user_id"
     t.bigint "user_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_fortunes_on_deleted_at"
     t.index ["from_user_id"], name: "index_fortunes_on_from_user_id"
     t.index ["user_id"], name: "index_fortunes_on_user_id"
   end
@@ -27,8 +29,22 @@ ActiveRecord::Schema.define(version: 20180423122435) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.datetime "deleted_at"
+    t.bigint "to_user_id"
     t.index ["deleted_at"], name: "index_gifts_on_deleted_at"
+    t.index ["to_user_id"], name: "index_gifts_on_to_user_id"
     t.index ["user_id"], name: "index_gifts_on_user_id"
+  end
+
+  create_table "prizes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.integer "price", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "thumbnail_file_name"
+    t.string "thumbnail_content_type"
+    t.integer "thumbnail_file_size"
+    t.datetime "thumbnail_updated_at"
+    t.index ["user_id"], name: "index_prizes_on_user_id"
   end
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,6 +92,8 @@ ActiveRecord::Schema.define(version: 20180423122435) do
   add_foreign_key "fortunes", "users"
   add_foreign_key "fortunes", "users", column: "from_user_id"
   add_foreign_key "gifts", "users"
+  add_foreign_key "gifts", "users", column: "to_user_id"
+  add_foreign_key "prizes", "users"
   add_foreign_key "teams", "users"
   add_foreign_key "users", "fortunes"
   add_foreign_key "users", "gifts"

@@ -53,10 +53,29 @@ class User < ApplicationRecord
   has_many :fortunes
 
   # paperclip
-  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.jpg"
+  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user/thumb/thumb-1.png"
   validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
 
   def has_fortunes
-    fortunes.order("created_at DESC")
+    fortunes.with_deleted.order("created_at DESC")
+  end
+
+  def error_message to_user
+    return "送りたい人が存在しないようです。" if !present_user?(to_user)
+    return "同じ月に同じ人には送れません" if sent_same_user_in_month?(to_user)
+  end
+
+  def present_user? to_user
+    to_user.present?
+  end
+
+  def sent_same_user_in_month? to_user
+    beginning_month = Time.zone.today.beginning_of_month
+    end_month = Time.zone.today.end_of_month
+
+    gifts.only_deleted.where(
+      to_user_id: to_user.id,
+      deleted_at: beginning_month..end_month
+    ).present?
   end
 end
