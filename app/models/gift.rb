@@ -25,5 +25,5 @@ class Gift < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user, counter_cache: true
-  belongs_to :to_user, class_name: 'User'
+  belongs_to :to_user, class_name: 'User', optional: true
 end
