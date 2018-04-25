@@ -44,7 +44,37 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test "user save" do
+    team = Team.new(name: 'Team')
+
+    user = User.new(
+      email: 'fuga@example.com',
+      password: 'hogefuga',
+      team: team
+    )
+
+    assert user.save, 'fail to save'
+  end
+
+  test "user can send gift" do
+    team = Team.new(name: 'Team')
+
+    from_user = User.create(
+      email: 'fuga@example.com',
+      password: 'hogefuga',
+      team: team
+    )
+
+    to_user = User.find_by_id(0)
+
+    no_save_user = User.new(
+      email: 'hogehoge@example.com',
+      password: 'hogefuga',
+      team: team
+    )
+
+    assert_equal from_user.error_message(from_user), "自分へは送れません"
+    assert_equal from_user.error_message(to_user), "送りたい人が存在しないようです"
+  end
 end

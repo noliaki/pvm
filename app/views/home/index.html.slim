@@ -6,10 +6,16 @@
 
 = current_user.gifts.size
 
-= form_for(@fortune, url: fortune_index_path) do |f|
-  = select_tag 'to_user_id', options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください"}
-  = f.text_area :message
-  = f.submit
+.action-container
+  = form_for(@fortune, url: fortune_index_path) do |f|
+    .action-container_to
+      = label_tag :to_user_id, "誰に"
+      = select_tag :to_user_id, options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください"}
+    .action-container_message
+    = f.text_area :message
+    .action-container_submit
+    = f.button '感謝の気持ちを送る', {class: 'btn btn-send'}
+
 - if current_user.fortunes.empty?
   | 何もないよ
 - else

@@ -61,8 +61,9 @@ class User < ApplicationRecord
   end
 
   def error_message to_user
-    return "送りたい人が存在しないようです。" if !present_user?(to_user)
-    return "同じ月に同じ人には送れません" if sent_same_user_in_month?(to_user)
+    return "自分へは送れません" if self.equal? to_user
+    return "送りたい人が存在しないようです" if !present_user? to_user
+    return "同じ月に同じ人には送れません" if sent_same_user_in_month? to_user
   end
 
   def present_user? to_user

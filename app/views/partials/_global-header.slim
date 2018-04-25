@@ -7,7 +7,9 @@ header.g-header
         .g-header-user-info__email
           = current_user.email
         .g-header-user-info__point
-          = current_user.fortunes.size
+          span.u-font-size-M = current_user.fortunes.size
+          | &nbsp;
+          i.fas.fa-gift
         .g-header-user-info__thumb
           = link_to image_tag(current_user.thumbnail.url(:thumb)), edit_user_registration_path
         .g-header-user-info__logout

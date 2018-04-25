@@ -2,7 +2,7 @@ class FortuneController < ApplicationController
   before_action :check_no_gifts, only: [:create]
 
   def create
-    to_user = User.find_by(id: params[:to_user_id])
+    to_user = User.find_by_id(params[:to_user_id])
 
     error_message = current_user.error_message to_user
 
