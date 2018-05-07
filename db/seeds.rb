@@ -5,19 +5,27 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-team = Team.create(
-  name: 'hoge_team'
-)
-
 10.times do |i|
   user = User.new(
     email: "hoge_#{i}@example.com",
     password: 'fugahoge'
   )
-  user.team = team
   user.save!
   3.times do
     user.gifts.create
   end
 end
+
+10.times do |i|
+  prize = Prize.create!(
+    name: "prize_#{i}",
+    description: "prize_#{i}の説明が入ります",
+    price: i
+  )
+end
+
+admin_user = AdminUser.new(
+  email: "admin@example.com",
+  password: "admin_admin"
+)
+admin_user.save!

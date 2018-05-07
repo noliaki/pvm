@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  root to: "home#index"
 
-  get 'home/authentication'
-
-  resources :fortune, only: [:create]
+  devise_for :admin_users
+  devise_scope :admin_user do
+    get '/admin_users/sign_out' => 'devise/sessions#destroy'
+  end
 
   devise_for :users
   devise_scope :user do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :fortune, only: [:create]
+  resources :prize, only: [:index]
 
-  root to: "home#index"
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :api, format: 'json' do
     namespace :v1 do

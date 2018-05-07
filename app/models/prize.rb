@@ -11,6 +11,8 @@
 #  thumbnail_content_type :string(255)
 #  thumbnail_file_size    :integer
 #  thumbnail_updated_at   :datetime
+#  name                   :string(255)
+#  description            :string(255)
 #
 # Indexes
 #
@@ -22,9 +24,9 @@
 #
 
 class Prize < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
   # paperclip
-  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.jpg"
+  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/prize/default.jpg"
   validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
 end
