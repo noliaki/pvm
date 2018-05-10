@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :fortune, only: [:create]
-  resources :prize, only: [:index]
+  resources :prize
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

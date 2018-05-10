@@ -6,7 +6,7 @@ class FortuneController < ApplicationController
 
     error_message = current_user.error_message to_user
 
-    return redirect_to home_index_path, flash: {
+    return redirect_to root_path, flash: {
       notice: error_message
     } if error_message.present?
 
@@ -17,7 +17,7 @@ class FortuneController < ApplicationController
       message: fortune_params[:message]
     ) if current_user.gifts.first.destroy
 
-    redirect_to home_index_path, flash: {
+    redirect_to root_path, flash: {
       notice: "#{to_user.name || to_user.email}に感謝を送れました"
     }
   end
