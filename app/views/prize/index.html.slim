@@ -1,5 +1,8 @@
+- if admin_user_signed_in?
+  = link_to('hoge', new_prize_path)
 - @prizes.each do |prize|
   - className = prize.price >= current_user.fortunes.count ? "disabled" : ""
+
   div(class = className)
     = prize.price
     = image_tag prize.thumbnail

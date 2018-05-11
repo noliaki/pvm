@@ -1,0 +1,15 @@
+= form_for(@prize, url: prize_index_path) do |f|
+  div
+    | 名前
+    = f.text_field :name
+  div
+    | 名前
+    = f.text_field :name
+  div
+    | 画像
+    = f.file_field :thumbnail, autofocus: true, autocomplete: "off"
+  div
+    | 説明
+    = f.text_area :description
+  div
+    = f.submit "追加"

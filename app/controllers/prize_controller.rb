@@ -2,7 +2,7 @@ class PrizeController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    if !user_signed_in?
+    if !user_signed_in? && !admin_user_signed_in?
       redirect_to root_path, flash: {
         notice: "だめ！！"
       }
@@ -11,6 +11,11 @@ class PrizeController < ApplicationController
   end
 
   def new
+    if !admin_user_signed_in?
+      redirect_to root_path, flash: {
+        notice: "だめ！！"
+      }
+    end
     @prize = Prize.new
   end
 
@@ -18,7 +23,9 @@ class PrizeController < ApplicationController
     @prize = Prize.new(prize_params)
 
     if @prize.save
-
+      redirect_to prize_index_path, flash: {
+        notice: "追加OK！"
+      }
     else
 
     end
@@ -27,6 +34,6 @@ class PrizeController < ApplicationController
   private
 
   def prize_params
-    params.require(:fortune).permit(:name, :discription, :thumbnail)
+    params.require(:prize).permit(:name, :discription, :thumbnail)
   end
 end
