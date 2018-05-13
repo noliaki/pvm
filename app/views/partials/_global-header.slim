@@ -1,16 +1,16 @@
-header.g-header
-  .container.g-header-container
-    .g-header-logo
-      = link_to image_tag('logo.svg'), '/', class: 'g-header-logo__anchor'
-    - if user_signed_in?
-      .g-header-user-info
-        .g-header-user-info__email
+header.border-bottom
+  .container
+    .row.justify-content-md-center.align-items-center
+      .col-1
+        = link_to image_tag('logo.svg', class: ['g-header-logo__anchor', 'w-100']), '/'
+      - if user_signed_in?
+        .col
           = current_user.email
-        .g-header-user-info__point
+        .col-1
           span.u-font-size-M = current_user.fortunes.size
           | &nbsp;
           i.fas.fa-gift
-        .g-header-user-info__thumb
-          = link_to image_tag(current_user.thumbnail.url(:thumb)), edit_user_registration_path
-        .g-header-user-info__logout
+        .col-1
+          = link_to image_tag(current_user.thumbnail.url(:thumb), class: "w-100"), edit_user_registration_path
+        .col-1
           = link_to 'logout', destroy_user_session_path

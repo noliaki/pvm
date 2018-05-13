@@ -1,29 +1,29 @@
-- if flash[:alert]
-  = flash[:alert]
-- if flash[:notice]
-  = flash[:notice]
-
-
-= current_user.gifts.size
-
-.action-container
-  = form_for(@fortune, url: fortune_index_path) do |f|
-    .action-container_to
-      = label_tag :to_user_id, "誰に"
-      = select_tag :to_user_id, options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください"}
-    .action-container_message
-    = f.text_area :message
-    .action-container_submit
-    = f.button '感謝の気持ちを送る', {class: 'btn btn-send'}
+.border.border-info.rounded.alert.alert-light
+  .row.align-items-center
+    .col-1.text-center
+      .display-4.font-weight-bold= current_user.gifts.size
+    .col
+      = form_for(@fortune, url: fortune_index_path) do |f|
+        .form-group.row
+          .col-1
+            = label_tag :to_user_id, "誰に", class: 'col-form-label'
+          .col
+            = select_tag :to_user_id, options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください", class: 'form-control'}
+        .form-group
+          = f.text_area :message, class: 'form-control'
+        .form-group.text-center
+          = f.button '感謝の気持ちを送る', {class: 'btn btn-success'}
 
 - if current_user.fortunes.empty?
   | 何もないよ
 - else
-  ul
+  ul.list-group
     - @has_fortunes.each do |fortune|
-      li
-        = image_tag(fortune.from_user.thumbnail.url(:thumb))
-        = fortune.created_at.strftime("%Y年%m月%d日 %H:%M:%S")
-        = fortune.from_user.email
-        br/
-        = fortune.message
+      li.list-group-item
+        .media
+          .mr-2= image_tag(fortune.from_user.thumbnail.url(:thumb), { width: 40 })
+          .media-body
+            header.d-flex.align-items-center
+              .small.font-weight-bold= fortune.from_user.name || fortune.from_user.email
+              small.ml-auto.text-black-50= fortune.created_at.strftime("%Y年%m月%d日 %H:%M:%S")
+            div= fortune.message
