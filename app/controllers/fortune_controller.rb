@@ -7,7 +7,7 @@ class FortuneController < ApplicationController
     error_message = current_user.error_message to_user
 
     return redirect_to root_path, flash: {
-      notice: error_message
+      alert: error_message
     } if error_message.present?
 
     current_user.gifts.first.update(to_user: to_user)

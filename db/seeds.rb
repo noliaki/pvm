@@ -19,7 +19,7 @@ end
 10.times do |i|
   prize = Prize.create!(
     name: "prize_#{i}",
-    description: "prize_#{i}の説明が入ります",
+    description: "prize_#{i}の説明が入ります。prize_#{i}の説明が入ります。prize_#{i}の説明が入ります。prize_#{i}の説明が入ります。",
     price: i
   )
 end

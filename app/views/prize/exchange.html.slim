@@ -1,0 +1,21 @@
+.alert.alert-info
+  h2 以下の景品と交換します。
+  hr
+  p
+    | 交換後の保有ポイントは
+    span.font-weight-bold(style="font-size: 1.4em;")= current_user.fortunes.size - @prize.price
+    | になります。
+
+.card
+  = form_for(@prize, url: prize_exchange_path, method: 'POST') do |f|
+    = f.hidden_field :id
+    = image_tag(@prize.thumbnail.url(:thumb), { class: 'card-img-top' })
+    .card-body.d-flex.align-items-end
+      div
+        h5.card-title= @prize.name
+        p.card-text= @prize.description
+        p.card-text
+          span.small 必要ポイント:&nbsp;
+          span.font-weight-bold= @prize.price
+      .ml-auto
+        button.btn.btn-primary(type="submit") 交換する

@@ -1,16 +1,24 @@
 header.border-bottom
   .container
-    .row.justify-content-md-center.align-items-center
+    .row.align-items-center
       .col-1
         = link_to image_tag('logo.svg', class: ['g-header-logo__anchor', 'w-100']), '/'
       - if user_signed_in?
         .col
-          = current_user.email
-        .col-1
-          span.u-font-size-M = current_user.fortunes.size
-          | &nbsp;
-          i.fas.fa-gift
-        .col-1
-          = link_to image_tag(current_user.thumbnail.url(:thumb), class: "w-100"), edit_user_registration_path
-        .col-1
-          = link_to 'logout', destroy_user_session_path
+          .row.align-items-center.justify-content-end
+            .col
+              nav.row.align-items-center.justify-content-end
+                .col-2.text-center
+                  = link_to '景品', prize_index_path, { class: 'text-success' }
+            .col
+              .row.align-items-center
+                .col.text-right.small
+                  = current_user.name || current_user.email
+                .col.text-danger
+                  span.font-weight-bold(style="font-size:1.3em") = current_user.fortunes.size
+                  | &nbsp;
+                  i.fas.fa-gift
+                .col-2
+                  = link_to image_tag(current_user.thumbnail.url(:thumb), class: "w-100"), edit_user_registration_path
+                .col
+                  = link_to 'logout', destroy_user_session_path

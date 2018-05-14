@@ -1,9 +1,17 @@
 - if admin_user_signed_in?
   = link_to('hoge', new_prize_path)
-.card-deck
+.card-deck.justify-content-around
   - @prizes.each do |prize|
-    - className = prize.price >= current_user.fortunes.count ? "bg-secondary" : ""
-    .card.m-2(class = className style="flex-basis: 20rem;max-width:20rem;")
+    - canPurchase = current_user.fortunes.count >= prize.price
+    - className = canPurchase ? "" : "bg-light"
+    .card.mb-4(class = className style=("flex-basis: 30%;max-width:30%;#{canPurchase ? "" : "opacity: 0.3;"}"))
+      .card-header.p-2= prize.name
       = image_tag prize.thumbnail, {class: 'card-img-top w-100 h-auto'}
       .card-body.p-2= prize.description
-      .card-footer.p-2= prize.price
+      .card-footer.p-2.d-flex.align-items-center
+        div
+          span.small 必要ポイント:&nbsp;
+          span.font-weight-bold(style="font-size: 1.4em")= prize.price
+        - if canPurchase
+          .ml-auto
+            = link_to '交換する', prize_exchange_path(prize.id), { class: 'btn btn-primary btn-sm' }

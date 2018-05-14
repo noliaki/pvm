@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   def index
     @users = User.where.not(id: current_user.id)
     @fortune = Fortune.new
-    @has_fortunes = current_user.has_fortunes
+    @fortunes_all = current_user.fortunes_all
   end
 
   def authentication

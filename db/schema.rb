@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180507074433) do
+ActiveRecord::Schema.define(version: 20180514072231) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 20180507074433) do
     t.index ["deleted_at"], name: "index_gifts_on_deleted_at"
     t.index ["to_user_id"], name: "index_gifts_on_to_user_id"
     t.index ["user_id"], name: "index_gifts_on_user_id"
+  end
+
+  create_table "prize_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "prize_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prize_id"], name: "index_prize_users_on_prize_id"
+    t.index ["user_id"], name: "index_prize_users_on_user_id"
   end
 
   create_table "prizes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -101,9 +110,11 @@ ActiveRecord::Schema.define(version: 20180507074433) do
     t.bigint "team_id"
     t.integer "gifts_count", default: 0
     t.integer "fortunes_count", default: 0
+    t.bigint "prize_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["fortune_id"], name: "index_users_on_fortune_id"
     t.index ["gift_id"], name: "index_users_on_gift_id"
+    t.index ["prize_id"], name: "index_users_on_prize_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["team_id"], name: "index_users_on_team_id"
   end
@@ -112,9 +123,12 @@ ActiveRecord::Schema.define(version: 20180507074433) do
   add_foreign_key "fortunes", "users", column: "from_user_id"
   add_foreign_key "gifts", "users"
   add_foreign_key "gifts", "users", column: "to_user_id"
+  add_foreign_key "prize_users", "prizes"
+  add_foreign_key "prize_users", "users"
   add_foreign_key "prizes", "users"
   add_foreign_key "teams", "users"
   add_foreign_key "users", "fortunes"
   add_foreign_key "users", "gifts"
+  add_foreign_key "users", "prizes"
   add_foreign_key "users", "teams"
 end

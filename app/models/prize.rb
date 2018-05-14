@@ -24,7 +24,7 @@
 #
 
 class Prize < ApplicationRecord
-  belongs_to :user, optional: true
+  # belongs_to :user, optional: true
 
   # paperclip
   has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/prize/default.jpg"

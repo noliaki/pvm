@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   end
 
   resources :fortune, only: [:create]
-  resources :prize
+  resources :prize do
+    get '/exchange' => 'prize#exchange'
+    post '/exchange' => 'prize#create_exchange'
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

@@ -25,12 +25,14 @@
 #  team_id                :bigint(8)
 #  gifts_count            :integer          default(0)
 #  fortunes_count         :integer          default(0)
+#  prize_id               :bigint(8)
 #
 # Indexes
 #
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_fortune_id            (fortune_id)
 #  index_users_on_gift_id               (gift_id)
+#  index_users_on_prize_id              (prize_id)
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_team_id               (team_id)
 #
@@ -38,6 +40,7 @@
 #
 #  fk_rails_...  (fortune_id => fortunes.id)
 #  fk_rails_...  (gift_id => gifts.id)
+#  fk_rails_...  (prize_id => prizes.id)
 #  fk_rails_...  (team_id => teams.id)
 #
 

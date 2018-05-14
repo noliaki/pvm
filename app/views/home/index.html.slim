@@ -1,24 +1,31 @@
 .border.border-info.rounded.alert.alert-light
-  .row.align-items-center
-    .col-1.text-center
-      .display-4.font-weight-bold= current_user.gifts.size
-    .col
-      = form_for(@fortune, url: fortune_index_path) do |f|
+  = form_for(@fortune, url: fortune_index_path) do |f|
+    .row.align-items-center
+      .col-2.text-center
+        .small 今月の送れる感謝
+        div
+          span.display-3.font-weight-bold= current_user.gifts.size
+          br/
+          span.font-weight-bold ポイント
+      .col
         .form-group.row
-          .col-1
+          .col-2.text-right
             = label_tag :to_user_id, "誰に", class: 'col-form-label'
           .col
             = select_tag :to_user_id, options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください", class: 'form-control'}
-        .form-group
-          = f.text_area :message, class: 'form-control'
-        .form-group.text-center
-          = f.button '感謝の気持ちを送る', {class: 'btn btn-success'}
+        .form-group.row
+          .col-2.text-right
+            = label_tag :fortune_message, "メッセージ", class: 'col-form-label'
+          .col
+            = f.text_area :message, class: 'form-control'
+    .form-group.text-center
+      = f.button '感謝の気持ちを送る', {class: 'btn btn-success'}
 
-- if current_user.fortunes.empty?
+- if current_user.fortunes_all.empty?
   | 何もないよ
 - else
   ul.list-group
-    - @has_fortunes.each do |fortune|
+    - @fortunes_all.each do |fortune|
       li.list-group-item
         .media
           .mr-2= image_tag(fortune.from_user.thumbnail.url(:thumb), { width: 40 })
