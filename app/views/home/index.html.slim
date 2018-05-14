@@ -22,7 +22,7 @@
       = f.button '感謝の気持ちを送る', {class: 'btn btn-success'}
 
 - if current_user.fortunes_all.empty?
-  | 何もないよ
+  .alert.alert-secondary.text-center 何もないよ
 - else
   ul.list-group
     - @fortunes_all.each do |fortune|

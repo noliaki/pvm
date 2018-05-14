@@ -13,7 +13,8 @@ html(lang="ja")
     / = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    = render './partials/global-header.slim'
+    - unless devise_controller?
+      = render './partials/global-header.slim'
     = render './partials/message.slim'
 
     main.container
