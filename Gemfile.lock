@@ -119,6 +119,7 @@ GEM
       terrapin (~> 0.6.0)
     paranoia (2.4.1)
       activerecord (>= 4.0, < 5.3)
+    pg (1.0.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -245,6 +246,7 @@ DEPENDENCIES
   mysql2 (>= 0.3.18, < 0.6.0)
   paperclip (~> 6.0.0)
   paranoia (~> 2.2)
+  pg
   pry-byebug
   pry-doc
   pry-rails
