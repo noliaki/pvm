@@ -1,4 +1,7 @@
 .border.border-info.rounded.alert.alert-light
+  - no_gift = current_user.gifts.empty?
+  - options = @users.map {|user| [user.name || user.email, user.id]}
+
   = form_for(@fortune, url: fortune_index_path) do |f|
     .row.align-items-center
       .col-2.text-center
@@ -12,14 +15,14 @@
           .col-2.text-right
             = label_tag :to_user_id, "誰に", class: 'col-form-label'
           .col
-            = select_tag :to_user_id, options_for_select(@users.map {|user| [user.name || user.email, user.id]}), {prompt: "選択してください", class: 'form-control'}
+            = select_tag :to_user_id, options_for_select(options), {prompt: "選択してください", class: 'form-control', disabled: no_gift}
         .form-group.row
           .col-2.text-right
             = label_tag :fortune_message, "メッセージ", class: 'col-form-label'
           .col
-            = f.text_area :message, class: 'form-control'
+            = f.text_area :message, class: 'form-control', disabled: no_gift
     .form-group.text-center
-      = f.button '感謝の気持ちを送る', {class: 'btn btn-success'}
+      = f.button '感謝の気持ちを送る', {class: 'btn btn-success', disabled: no_gift}
 
 - if current_user.fortunes_all.empty?
   .alert.alert-secondary.text-center 何もないよ
@@ -28,7 +31,7 @@
     - @fortunes_all.each do |fortune|
       li.list-group-item
         .media
-          .mr-2= image_tag(fortune.from_user.thumbnail.url(:thumb), { width: 40 })
+          .mr-2= image_tag(user_thumbnail(fortune.from_user), { width: 40 })
           .media-body
             header.d-flex.align-items-center
               .small.font-weight-bold= fortune.from_user.name || fortune.from_user.email

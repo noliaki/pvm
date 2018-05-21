@@ -9,7 +9,7 @@
 .card
   = form_for(@prize, url: prize_exchange_path, method: 'POST') do |f|
     = f.hidden_field :id
-    = image_tag(@prize.thumbnail.url(:thumb), { class: 'card-img-top' })
+    = image_tag(prize_thumbnail(@prize), { class: 'card-img-top' })
     .card-body.d-flex.align-items-end
       div
         h5.card-title= @prize.name

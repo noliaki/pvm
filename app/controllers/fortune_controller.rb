@@ -29,7 +29,7 @@ class FortuneController < ApplicationController
   end
 
   def check_no_gifts
-    return redirect_to home_index_path,
+    return redirect_to root_path,
       flash: {
         alert: '送れる感謝はないです。'
       } if current_user.gifts.empty?
