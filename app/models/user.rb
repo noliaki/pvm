@@ -18,10 +18,6 @@
 #  gift_id                :bigint(8)
 #  fortune_id             :bigint(8)
 #  name                   :string(255)
-#  thumbnail_file_name    :string(255)
-#  thumbnail_content_type :string(255)
-#  thumbnail_file_size    :integer
-#  thumbnail_updated_at   :datetime
 #  team_id                :bigint(8)
 #  gifts_count            :integer          default(0)
 #  fortunes_count         :integer          default(0)
@@ -57,9 +53,10 @@ class User < ApplicationRecord
   has_many :prize_users
   has_many :prizes, through: :prize_users
 
+  has_one_attached :thumbnail
   # paperclip
-  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user/thumb/thumb-1.png"
-  validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
+  # has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user/thumb/thumb-1.png"
+  # validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
 
   def fortunes_all
     fortunes.with_deleted.order("created_at DESC")

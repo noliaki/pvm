@@ -39,6 +39,7 @@ gem 'paperclip', "~> 6.0.0"
 gem "paranoia", "~> 2.2"
 
 gem 'bootsnap', "~> 1.3.0", require: false
+gem 'mini_magick', "~> 4.8.0"
 
 group :development, :test do
   # Use mysql as the database for Active Record
