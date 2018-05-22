@@ -27,8 +27,10 @@ Rails.application.routes.draw do
     post '/exchange' => 'prize#create_exchange'
   end
 
-  namespace :manage do
+  namespace :admin do
+    get "/" => "home#index"
     resources :prizes
+    resources :users
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

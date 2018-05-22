@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     when User then
       root_path
     when AdminUser then
-      manage_prizes_path
+      admin_path
     end
   end
 
