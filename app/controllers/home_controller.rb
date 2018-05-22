@@ -6,7 +6,4 @@ class HomeController < ApplicationController
     @fortune = Fortune.new
     @fortunes_all = current_user.fortunes_all
   end
-
-  def authentication
-  end
 end
