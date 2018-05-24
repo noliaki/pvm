@@ -1,5 +1,3 @@
-class Admin::ApplicationController < ActionController::Base
+class Admin::ApplicationController < ApplicationController
   before_action :authenticate_admin_user!
-  protect_from_forgery with: :exception
-  layout "admin/application"
 end
