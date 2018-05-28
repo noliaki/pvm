@@ -5,24 +5,20 @@
   = form_for(@fortune, url: fortune_index_path) do |f|
     .row.align-items-center
       .col-2.text-center
-        .small 今月の送れる感謝
+        .small 今月の送れる
+          = t("unit")
         div
           span.display-3.font-weight-bold= current_user.gifts.size
           br/
-          span.font-weight-bold ポイント
+          span.font-weight-bold= t("unit")
       .col
         .form-group.row
-          .col-2.text-right
-            = label_tag :to_user_id, "誰に", class: 'col-form-label'
-          .col
-            = select_tag :to_user_id, options_for_select(options), {prompt: "選択してください", class: 'form-control', disabled: no_gift}
+          .col-2.text-right= label_tag :to_user_id, "誰に", class: 'col-form-label'
+          .col= select_tag :to_user_id, options_for_select(options), {prompt: "選択してください", class: 'form-control', disabled: no_gift}
         .form-group.row
-          .col-2.text-right
-            = label_tag :fortune_message, "メッセージ", class: 'col-form-label'
-          .col
-            = f.text_area :message, class: 'form-control', disabled: no_gift
-    .form-group.text-center
-      = f.button '感謝の気持ちを送る', {class: 'btn btn-success', disabled: no_gift}
+          .col-2.text-right= label_tag :fortune_message, "メッセージ", class: 'col-form-label'
+          .col= f.text_area :message, class: 'form-control', disabled: no_gift
+    .form-group.text-center= f.button '感謝の気持ちを送る', {class: 'btn btn-success', disabled: no_gift}
 
 - if current_user.fortunes_all.empty?
   .alert.alert-secondary.text-center 何もないよ
