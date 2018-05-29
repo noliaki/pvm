@@ -54,9 +54,8 @@ class User < ApplicationRecord
   has_many :prizes, through: :prize_users
 
   has_one_attached :thumbnail
-  # paperclip
-  # has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user/thumb/thumb-1.png"
-  # validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
+
+  validate :email_can_not_change
 
   def fortunes_all
     fortunes.with_deleted.order("created_at DESC")
@@ -80,5 +79,13 @@ class User < ApplicationRecord
       to_user_id: to_user.id,
       deleted_at: beginning_month..end_month
     ).present?
+  end
+
+  private
+
+  def email_can_not_change
+    if email_changed?
+      errors.add(:email)
+    end
   end
 end

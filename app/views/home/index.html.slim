@@ -5,7 +5,8 @@
   = form_for(@fortune, url: fortune_index_path) do |f|
     .row.align-items-center
       .col-2.text-center
-        .small 今月の送れる
+        .small
+          | 今月の送れる
           = t("unit")
         div
           span.display-3.font-weight-bold= current_user.gifts.size
