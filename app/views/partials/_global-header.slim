@@ -1,24 +1,25 @@
-header.border-bottom
-  .container
-    .row.align-items-center
-      .col-1
-        = link_to image_tag('logo.svg', class: ['g-header-logo__anchor', 'w-100']), '/'
-      - if user_signed_in?
-        .col
-          .row.align-items-center.justify-content-end
-            .col
-              nav.row.align-items-center.justify-content-end
-                .col-2.text-center
-                  = link_to t("prize"), prize_index_path, { class: 'text-success' }
-            .col
-              .row.align-items-center
-                .col.text-right.small
-                  = current_user.name || current_user.email
-                .col.text-danger
-                  span.font-weight-bold(style="font-size:1.3em") = current_user.fortunes.size
-                  | &nbsp;
-                  i.fas.fa-gift
-                .col-2
-                  = link_to image_tag(user_thumbnail, class: "w-100"), edit_user_registration_path
-                .col
-                  = link_to 'logout', destroy_user_session_path
+- if controller_name == "sessions" && user_signed_in? && controller.action_name != "new"
+  header.border-bottom
+    .container
+      .row.align-items-center
+        .col-1
+          = link_to image_tag('logo.svg', class: ['g-header-logo__anchor', 'w-100']), '/'
+        - if user_signed_in?
+          .col
+            .row.align-items-center.justify-content-end
+              .col
+                nav.row.align-items-center.justify-content-end
+                  .col-2.text-center
+                    = link_to t("prize"), prizes_path, { class: 'text-success' }
+              .col
+                .row.align-items-center
+                  .col.text-right.small
+                    = current_user.name || current_user.email
+                  .col.text-danger
+                    span.font-weight-bold(style="font-size:1.3em") = current_user.fortunes.size
+                    | &nbsp;
+                    i.fas.fa-gift
+                  .col-2
+                    = link_to image_tag(user_thumbnail, class: "w-100"), edit_user_registration_path
+                  .col
+                    = link_to 'logout', destroy_user_session_path

@@ -72,14 +72,14 @@ class User < ApplicationRecord
   def error_message to_user
     return "自分へは送れません" if self.equal? to_user
     return "送りたい人が存在しないようです" if !present_user? to_user
-    return "3ヶ月以内に同じ人には送れません" if sent_same_user_in_3_month? to_user
+    return "3ヶ月以内に同じ人には送れません" if sent_same_user_in_invalid_period? to_user
   end
 
   def present_user? to_user
     to_user.present?
   end
 
-  def sent_same_user_in_3_month? to_user
+  def sent_same_user_in_invalid_period? to_user
     today = Time.zone.today
 
     gifts.only_deleted.where(
@@ -89,8 +89,8 @@ class User < ApplicationRecord
 
   private
 
-  def invalid_period(gift)
-    (gift.deleted_at + 2.month).end_of_month
+  def invalid_period(deleted_gift)
+    (deleted_gift.deleted_at + 2.month).end_of_month
   end
 
   def email_can_not_change

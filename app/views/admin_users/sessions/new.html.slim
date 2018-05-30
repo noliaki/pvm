@@ -1,6 +1,7 @@
 .row.justify-content-center
   .col-5.mt-5
     = image_tag('logo.svg', class: ['w-100'])
+    | 管理者用
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .mt-5
         .row.form-group

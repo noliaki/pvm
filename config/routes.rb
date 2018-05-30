@@ -21,10 +21,10 @@ Rails.application.routes.draw do
     get '/users/sign_out' => 'users/sessions#destroy'
   end
 
-  resources :fortune, only: [:create]
-  resources :prize do
-    get '/exchange' => 'prize#exchange'
-    post '/exchange' => 'prize#create_exchange'
+  resources :fortunes, only: [:create]
+  resources :prizes do
+    get '/exchange' => 'prizes#exchange'
+    post '/exchange' => 'prizes#create_exchange'
   end
 
   namespace :admin do
