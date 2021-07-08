@@ -2,15 +2,11 @@
 #
 # Table name: teams
 #
-#  id                     :bigint(8)        not null, primary key
-#  name                   :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  thumbnail_file_name    :string(255)
-#  thumbnail_content_type :string(255)
-#  thumbnail_file_size    :integer
-#  thumbnail_updated_at   :datetime
-#  user_id                :bigint(8)
+#  id         :bigint(8)        not null, primary key
+#  name       :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint(8)
 #
 # Indexes
 #

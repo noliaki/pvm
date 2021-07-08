@@ -1,0 +1,40 @@
+class FortunesController < ApplicationController
+  before_action :check_no_gifts, only: [:create]
+
+  def create
+    to_user = User.find_by_id(params[:to_user_id])
+
+    error_message = current_user.error_message(to_user)
+
+    return redirect_to root_path, flash: {
+      alert: error_message
+    } if error_message.present?
+
+    user_gift = current_user.gifts.first
+    user_gift.update(to_user: to_user)
+
+    if user_gift.destroy
+      to_user.fortunes.create(
+        from_user: current_user,
+        message: fortune_params[:message]
+      )
+
+      redirect_to root_path, flash: {
+        notice: "#{to_user.name || to_user.email}に感謝を送れました"
+      }
+    end
+  end
+
+  private
+
+  def fortune_params
+    params.require(:fortune).permit(:message)
+  end
+
+  def check_no_gifts
+    return redirect_to root_path,
+      flash: {
+        alert: '送れる感謝はないです。'
+      } if current_user.gifts.empty?
+  end
+end

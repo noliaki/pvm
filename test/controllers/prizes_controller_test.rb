@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PrizeControllerTest < ActionDispatch::IntegrationTest
+class PrizesControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

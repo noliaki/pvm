@@ -18,10 +18,6 @@
 #  gift_id                :bigint(8)
 #  fortune_id             :bigint(8)
 #  name                   :string(255)
-#  thumbnail_file_name    :string(255)
-#  thumbnail_content_type :string(255)
-#  thumbnail_file_size    :integer
-#  thumbnail_updated_at   :datetime
 #  team_id                :bigint(8)
 #  gifts_count            :integer          default(0)
 #  fortunes_count         :integer          default(0)

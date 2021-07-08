@@ -18,10 +18,6 @@
 #  gift_id                :bigint(8)
 #  fortune_id             :bigint(8)
 #  name                   :string(255)
-#  thumbnail_file_name    :string(255)
-#  thumbnail_content_type :string(255)
-#  thumbnail_file_size    :integer
-#  thumbnail_updated_at   :datetime
 #  team_id                :bigint(8)
 #  gifts_count            :integer          default(0)
 #  fortunes_count         :integer          default(0)
@@ -57,9 +53,17 @@ class User < ApplicationRecord
   has_many :prize_users
   has_many :prizes, through: :prize_users
 
-  # paperclip
-  has_attached_file :thumbnail, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/user/thumb/thumb-1.png"
-  validates_attachment_content_type :thumbnail, content_type: /\Aimage\/.*\z/
+  has_one_attached :thumbnail
+
+  validate :email_can_not_change
+
+  def can_send_users
+    today = Time.zone.today
+
+    user_ids = gifts.only_deleted.select { |gift| invalid_period(gift) >= today }.pluck(:to_user_id)
+
+    User.where.not(id: user_ids.push(id))
+  end
 
   def fortunes_all
     fortunes.with_deleted.order("created_at DESC")
@@ -68,20 +72,30 @@ class User < ApplicationRecord
   def error_message to_user
     return "自分へは送れません" if self.equal? to_user
     return "送りたい人が存在しないようです" if !present_user? to_user
-    return "同じ月に同じ人には送れません" if sent_same_user_in_month? to_user
+    return "3ヶ月以内に同じ人には送れません" if sent_same_user_in_invalid_period? to_user
   end
 
   def present_user? to_user
     to_user.present?
   end
 
-  def sent_same_user_in_month? to_user
-    beginning_month = Time.zone.today.beginning_of_month
-    end_month = Time.zone.today.end_of_month
+  def sent_same_user_in_invalid_period? to_user
+    today = Time.zone.today
 
     gifts.only_deleted.where(
-      to_user_id: to_user.id,
-      deleted_at: beginning_month..end_month
-    ).present?
+      to_user_id: to_user.id
+    ).select { |gift| invalid_period(gift) >= today }.present?
+  end
+
+  private
+
+  def invalid_period(deleted_gift)
+    (deleted_gift.deleted_at + 2.month).end_of_month
+  end
+
+  def email_can_not_change
+    if email_changed?
+      errors.add(:email)
+    end
   end
 end

@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2'
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -37,6 +37,9 @@ gem 'slim-rails', '~> 3.1.3'
 gem 'cancancan', '~> 2.0'
 gem 'paperclip', "~> 6.0.0"
 gem "paranoia", "~> 2.2"
+
+gem 'bootsnap', "~> 1.3.0", require: false
+gem 'mini_magick', "~> 4.8.0"
 
 group :development, :test do
   # Use mysql as the database for Active Record
